@@ -58,12 +58,12 @@ class NPC extends Person {
 }
 
 $sam = new NPC("I am Sam!");
-$sam->name = "陳逸澄";
+$sam->name = "澄";
 $sam->gender = "M";
 $sam->age = 14;
 
 $ocean = new NPC("I am Ocean!");
-$ocean->name = "陳逸洋";
+$ocean->name = "洋";
 $ocean->gender = "F";
 $ocean->age = 14;
 
