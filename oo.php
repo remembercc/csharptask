@@ -7,71 +7,106 @@ class Person {
 
   public $type;
 
-  public function get_name(){
-    echo "Name: " . $this->name . "\n";
+  public function setter($attr, $value) {
+    $this->{$attr} = $value;
   }
 
-  public function get_gender(){
-    echo "Gender: " . $this->gender . "\n";
-  }
-
-  public function get_age(){
-    echo "Age: " . $this->age . "\n";
-  }
-
-  public function get_type(){
-    echo "Type: " . $this->type . "\n";
+  public function getter($attr) {
+    if (isset($this->{$attr})) {
+      return $attr . ": " . $this->{$attr};
+    }
+    return null;
   }
 }
 
 class Player extends Person {
-  public function __construct($dialogue){
+  /**
+   * Construction
+   */
+  public function __construct(){
     $this->type = "Player";
+  }
+
+
+  /**
+   * Player Speaking
+   * 
+   * @return String
+   */
+  public function speak(){
+    return <<<NPC
+    > Hello, I am $this->name,
+    > I am $this->age years-old and I am a $this->gender.
+    > I am a Game Player so I don't have any catchphrase! Yooooooooooooooo!
+    NPC;
   }
 }
 
 class NPC extends Person {
-  // 對白
-  public $dialogue;
+  // 口頭蟬
+  public $catchphrase;
 
-  public function __construct($dialogue){
+
+  /**
+   * Construction
+   */
+  public function __construct(){
     $this->type = "NPC";
-    $this->dialogue = $dialogue;
   }
 
+
+  /** 
+   * Set NPC's catchphrase
+   * 
+   * @param string str
+   * @return null
+   */
+  public function set_catchphrase($str){
+    $this->catchphrase = $str;
+  }
+
+  /**
+   * NPC Speaking
+   * 
+   * @return String
+   */
   public function speak(){
-    if ($this->gender == "M") {
-      if ($this->age >= 15) {
-        echo "Yooooooo! this is $this->name\n";
-      } else {
-        echo "Hello... $this->dialogue\n";  
-      }
-    } else {
-      echo "你好... 我係 $this->name\n";
-    }
-
+    return <<<NPC
+    > Hello, I am $this->name,
+    > I am $this->age years-old and I am a $this->gender.
+    > My catchphrase is: $this->catchphrase!
+    NPC;
   }
 
+  /**
+   * NPC says bye bye 
+   * 
+   * @return String 
+   */
   public function bye(){
-    echo "Bye... $this->dialogue\n";
+    return "Bye... $this->dialogue";
   }
 }
 
-$sam = new NPC("I am Sam!");
-$sam->name = "澄";
-$sam->gender = "M";
-$sam->age = 14;
+$sam = new NPC();
+$sam->setter("name", "澄");
+$sam->setter("gender", "Male");
+$sam->setter("age", 15);
 
-$ocean = new NPC("I am Ocean!");
-$ocean->name = "洋";
-$ocean->gender = "F";
-$ocean->age = 14;
+// $sam->set_catchphrase("thi");
+
+// $ocean = new NPC();
+// $ocean->name = "洋";
+// $ocean->gender = "F";
+// $ocean->age = 14;
 
 // $sam->get_name();
 // $sam->get_gender();
 // $sam->get_age();
 // $sam->get_type();
 // NPC only
-$sam->speak();
-$ocean->speak();
+echo $sam->speak() . "\n";
 // $ocean->speak("");
+
+
+echo $sam->getter("gender") . "\n";
