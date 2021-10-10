@@ -105,8 +105,9 @@ $sam->setter("age", 15);
 // $sam->get_age();
 // $sam->get_type();
 // NPC only
-echo $sam->speak() . "\n";
+echo $sam->set_catchphrase("是我是我");
+echo $sam->speak();
 // $ocean->speak("");
 
 
-echo $sam->getter("gender") . "\n";
+// echo $sam->getter("gender") . "\n";
